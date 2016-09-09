@@ -6,8 +6,7 @@
 
 # Installing Composer
 echo "Installing Composer"
-curl -sS https://getcomposer.org/installer | php > /dev/null 2>&1
-mv composer.phar /usr/local/bin/composer > /dev/null 2>&1
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Git
 echo "Installing Git"
