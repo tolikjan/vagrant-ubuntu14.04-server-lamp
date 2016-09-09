@@ -21,8 +21,8 @@ apt-get install php5-memcached php5-memcache php5-json > /dev/null 2>&1
 # Enable php5-mcrypt mode
 php5enmod mcrypt > /dev/null 2>&1
 
-# PHP Error Reporting Timezone Config
-echo "Configuring PHP"
+# PHP Error Reporting, Timezone Config, fixing max memory and max execution time limits
+echo "Configuring php.ini"
 # php.ini configuration for displaying errors
 for INI in $(find /etc -name 'php.ini')
 do
@@ -31,8 +31,12 @@ do
   sed -i 's/^display_startup_errors = Off/display_startup_errors = On/' ${INI}
   sed -i 's/^html_errors = Off/html_errors = On/' ${INI}
   # Change configuration if you planing to load big files
-  sed -i 's/^post_max_size = 8M/post_max_size = 200M/' ${INI}
-  sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 200M/' ${INI}
+  sed -i 's/^post_max_size = 8M/post_max_size = 750M/' ${INI}
+  sed -i 's/^upload_max_filesize = 2M/upload_max_filesize = 750M/' ${INI}
+  # Change configuration if you need to increase memory limits
+  sed -i 's/^max_execution_time = 30/max_execution_time = 259200/' ${INI}
+  sed -i 's/^max_input_time = 60/max_input_time = 259200/' ${INI}
+  sed -i 's/^memory_limit = 128M/memory_limit = 1000M/' ${INI}
 done
 
 # xВebug Config
