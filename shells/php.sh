@@ -41,7 +41,7 @@ done
 
 # xВebug Config
 echo "Configuring Xdebug"
-XDEBUG="$(sudo find / -name "xdebug.so" 2> /dev/null)"
+XDEBUG="$(sudo find / -name 'xdebug.so' 2> /dev/null)"
 sleep 10
 for INI in $(sudo find /etc -name 'php.ini')
 do
