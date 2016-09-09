@@ -24,7 +24,7 @@ php5enmod mcrypt > /dev/null 2>&1
 # PHP Error Reporting, Timezone Config, fixing max memory and max execution time limits
 echo "Configuring php.ini"
 # php.ini configuration for displaying errors
-for INI in $(find /etc -name 'php.ini')
+for INI in $(sudo find /etc -name 'php.ini')
 do
   sed -i 's/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/' ${INI}
   sed -i 's/^display_errors = Off/display_errors = On/' ${INI}
@@ -41,9 +41,9 @@ done
 
 # xВebug Config
 echo "Configuring Xdebug"
-XDEBUG="$(find / -name "xdebug.so" 2> /dev/null)"
+XDEBUG="$(sudo find / -name "xdebug.so" 2> /dev/null)"
 sleep 10
-for INI in $(find /etc -name 'php.ini')
+for INI in $(sudo find /etc -name 'php.ini')
 do
   echo "zend_extension=\"${XDEBUG}\"" >> ${INI}
   echo "memory_limit=-1" >> ${INI}
